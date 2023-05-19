@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Text } from "react-native";
 import { Button, TextInput } from "@react-native-material/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -7,12 +7,14 @@ const { width } = Dimensions.get("screen");
 
 const onPressHandler = () => {};
 
-const Form = ({ inputFieldText, buttonHandler }) => {
+const Form = ({ inputFieldText, screenName, buttonHandler }) => {
   return (
     <KeyboardAwareScrollView
       style={styles.root}
       showsVerticalScrollIndicator={false}
     >
+      <Text style={{ fontSize: 30, marginBottom: 25 }}>{screenName}</Text>
+
       {inputFieldText.map((i, idx) => {
         return <TextInput key={idx} label={i} style={{ width: width - 100 }} />;
       })}
@@ -24,12 +26,17 @@ const Form = ({ inputFieldText, buttonHandler }) => {
 
 const styles = StyleSheet.create({
   root: {
-    paddingTop: 100,
+    paddingTop: 50,
     borderwidth: 3,
     borderColor: "blue",
   },
+  containerStyle: {
+    // alignItems: "center",
+    // borderwidth: 1,
+    // borderColor: "red",
+  },
   button: {
-    marginTop: 100,
+    marginTop: 50,
     width: width - 100,
     height: 50,
     justifyContent: "center",

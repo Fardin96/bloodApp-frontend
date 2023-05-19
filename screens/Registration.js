@@ -16,11 +16,9 @@ const inputFields = [
 const Registration = () => {
   return (
     <View>
-      <Form inputFieldText={inputFields} />
+      <Form screenName={"Registration"} inputFieldText={inputFields} />
     </View>
   );
 };
 
 export default Registration;
-
-const styles = StyleSheet.create({});
