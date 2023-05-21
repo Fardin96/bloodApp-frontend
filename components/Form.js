@@ -5,9 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 const { width } = Dimensions.get("screen");
 
-const onPressHandler = () => {};
-
-const Form = ({ inputFieldText, screenName, buttonHandler }) => {
+const Form = ({ inputFieldText, screenName, onSubmit }) => {
   return (
     <KeyboardAwareScrollView
       style={styles.root}
@@ -19,7 +17,7 @@ const Form = ({ inputFieldText, screenName, buttonHandler }) => {
         return <TextInput key={idx} label={i} style={{ width: width - 100 }} />;
       })}
 
-      <Button style={styles.button} title="Submit" onPress={onPressHandler} />
+      <Button style={styles.button} title="Submit" onPress={onSubmit} />
     </KeyboardAwareScrollView>
   );
 };
@@ -29,11 +27,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     borderwidth: 3,
     borderColor: "blue",
-  },
-  containerStyle: {
-    // alignItems: "center",
-    // borderwidth: 1,
-    // borderColor: "red",
   },
   button: {
     marginTop: 50,
