@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 
 import Form from "../components/Form";
@@ -17,6 +17,10 @@ const inputFields = [
 ];
 
 const Registration = ({ navigation }) => {
+  const [text, setText] = useState("");
+
+  console.log("the text of text input is: ", text);
+
   const onSubmit = async () => {
     const data = {
       name: "user3",
@@ -58,9 +62,10 @@ const Registration = ({ navigation }) => {
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Form
         screenName={"Registration"}
-        inputFieldText={inputFields}
+        inputFieldLabel={inputFields}
         onSubmit={onSubmit}
-        // onChangeText={}
+        onChangeText={setText}
+        // value={text}
       />
     </View>
   );

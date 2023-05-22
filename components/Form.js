@@ -1,16 +1,17 @@
 import React from "react";
 import { Dimensions, ScrollView, StyleSheet, Text } from "react-native";
 import { Button, TextInput } from "@react-native-material/core";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { width } = Dimensions.get("screen");
 const FORM_WIDTH = width - 100;
 
-<<<<<<< HEAD
-const Form = ({ inputFieldText, screenName, onSubmit }) => {
-=======
-const Form = ({ inputFieldText, screenName, onSubmit, onChangeText }) => {
->>>>>>> 9842388f422a58be1e5e77a49aa0c083f715097a
+const Form = ({
+  inputFieldLabel,
+  value,
+  screenName,
+  onSubmit,
+  onChangeText,
+}) => {
   return (
     <ScrollView
       style={styles.root}
@@ -21,23 +22,24 @@ const Form = ({ inputFieldText, screenName, onSubmit, onChangeText }) => {
         {screenName}
       </Text>
 
-      {inputFieldText.map((i, idx) => {
+      {inputFieldLabel.map((i, idx) => {
         return (
           <TextInput
             key={idx}
             label={i}
+            // autoComplete={false}
+            // autoCapitalize="false"
+            clearButtonMode="unless-editing"
+            // value={value}
             style={{ width: FORM_WIDTH }}
             onChangeText={onChangeText}
+            // onSubmitEditing={onChangeText}
           />
         );
       })}
 
       <Button style={styles.button} title="Submit" onPress={onSubmit} />
-<<<<<<< HEAD
-    </KeyboardAwareScrollView>
-=======
     </ScrollView>
->>>>>>> 9842388f422a58be1e5e77a49aa0c083f715097a
   );
 };
 
@@ -48,12 +50,9 @@ const styles = StyleSheet.create({
     // borderColor: "blue",
     // backgroundColor: "green",
   },
-<<<<<<< HEAD
-=======
   scrollContainer: {
     alignItems: "center",
   },
->>>>>>> 9842388f422a58be1e5e77a49aa0c083f715097a
   button: {
     marginVertical: 50,
     width: FORM_WIDTH,
