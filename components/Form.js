@@ -5,13 +5,7 @@ import { Button, TextInput } from "@react-native-material/core";
 const { width } = Dimensions.get("screen");
 const FORM_WIDTH = width - 100;
 
-const Form = ({
-  inputFieldLabel,
-  value,
-  screenName,
-  onSubmit,
-  onChangeText,
-}) => {
+const Form = ({ inputFields, value, screenName, onSubmit, onChangeText }) => {
   return (
     <ScrollView
       style={styles.root}
@@ -22,17 +16,18 @@ const Form = ({
         {screenName}
       </Text>
 
-      {inputFieldLabel.map((i, idx) => {
+      {inputFields.map((i, idx) => {
         return (
           <TextInput
             key={idx}
-            label={i}
+            label={i.label}
             // autoComplete={false}
             // autoCapitalize="false"
-            clearButtonMode="unless-editing"
-            // value={value}
+            // clearButtonMode="unless-editing"
+
+            value={i.value}
             style={{ width: FORM_WIDTH }}
-            onChangeText={onChangeText}
+            onChangeText={i.setter}
             // onSubmitEditing={onChangeText}
           />
         );

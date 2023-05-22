@@ -5,67 +5,76 @@ import Form from "../components/Form";
 
 import { API_URL } from "@env";
 
-const inputFields = [
-  "name",
-  "email",
-  "password",
-  "blood group",
-  "contact",
-  "address",
-  "dob",
-  "recency",
-];
-
 const Registration = ({ navigation }) => {
-  const [text, setText] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
+  const [dob, setDob] = useState("");
+  const [recency, setRecency] = useState("");
+  const [nid, setNid] = useState("");
 
-  console.log("the text of text input is: ", text);
+  const inputFields = [
+    { label: "name", setter: setName, value: name },
+    { label: "email", setter: setEmail, value: email },
+    { label: "password", setter: setPassword, value: password },
+    { label: "blood group", setter: setBloodGroup, value: bloodGroup },
+    { label: "contact", setter: setContact, value: contact },
+    { label: "address", setter: setAddress, value: address },
+    { label: "dob", setter: setDob, value: dob },
+    { label: "recency", setter: setRecency, value: recency },
+    { label: "nid", setter: setNid, value: nid },
+  ];
 
   const onSubmit = async () => {
     const data = {
-      name: "user3",
-      email: "user3@gmail.com",
-      password: "1111",
-      bloodGroup: "O+",
-      contact: "03234234234",
-      address: "badda, dhaka",
-      dob: "12-22-23",
-      recency: "12-22-23",
-      nid: "32423492837408327",
+      name: name,
+      email: email,
+      password: password,
+      bloodGroup: bloodGroup,
+      contact: bloodGroup,
+      address: address,
+      dob: dob,
+      recency: recency,
+      nid: nid,
     };
     console.log("form data: ", data);
 
-    // const api = `${API_URL}/donor/add/`;
+    const api = `${API_URL}/donor/add/`;
 
-    // console.log("the api is :", api);
+    console.log("the api is :", api);
 
-    // await fetch(api, {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then(async (response) => {
-    //     const res = await response.json();
-    //     console.log("response from registration: ", res);
-    //     navigation.navigate("login");
-    //   })
-    //   .catch(async (error) => {
-    //     // const err = await error.json();
-    //     console.log("error from registration: ", error);
-    //   });
+    await fetch(api, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(async (response) => {
+        console.log("fetched data");
+        const res = await response.json();
+        console.log("response from registration: ", res);
+        navigation.navigate("login");
+      })
+      .catch(async (error) => {
+        // const err = await error.json();
+        console.log("error from registration: ", error);
+      });
+
+    console.log("end of the function");
   };
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Form
         screenName={"Registration"}
-        inputFieldLabel={inputFields}
+        inputFields={inputFields}
         onSubmit={onSubmit}
-        onChangeText={setText}
-        // value={text}
+        onChangeText={() => console.log("first")}
       />
     </View>
   );
