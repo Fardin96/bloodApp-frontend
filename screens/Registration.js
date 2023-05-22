@@ -14,30 +14,33 @@ const inputFields = [
 ];
 
 const onSubmit = async () => {
-  // const data = {
-  //   name: "new133",
-  //   email: "ne123@gmail.com",
-  //   password: "1111",
-  //   bloodGroup: "O+",
-  //   contact: "03234234234",
-  //   address: "badda, dhaka",
-  //   dob: "12-22-23",
-  //   recency: "12-22-23",
-  //   nid: "32423492837408327",
-  // };
+  const data = {
+    name: "new134",
+    email: "ne124@gmail.com",
+    password: "1111",
+    bloodGroup: "O+",
+    contact: "03234234234",
+    address: "badda, dhaka",
+    dob: "12-22-23",
+    recency: "12-22-23",
+    nid: "32423492837408327",
+  };
 
-  // const response = await fetch("http://localhost:5001/donor/add/", {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-type": "application/json",
-  //   },
-  //   body: JSON.stringify(data),
-  // });
-
-  // const res = await response.json();
-  // console.log("response: ", res);
-  console.log("response: ");
+  await fetch("http://localhost:5001/donor/add/", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(async (response) => {
+      const res = await response.json();
+      console.log("response: ", res);
+    })
+    .catch((error) => {
+      console.log("error fetching registration response : ", error);
+    });
 };
 
 const Registration = () => {
