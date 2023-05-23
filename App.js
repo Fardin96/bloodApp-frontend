@@ -18,8 +18,8 @@ export default function App() {
       {/* <View style={styles.container}> */}
       {/* <Registration /> */}
       <Stack.Navigator
-        initialRouteName="registration"
-        // screenOptions={{ headerShown: false }}
+        initialRouteName="login"
+        screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="registration" component={Registration} />
         <Stack.Screen name="login" component={Login} />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 
 import Form from "../components/Form";
 
@@ -102,15 +102,15 @@ const Registration = ({ navigation }) => {
     };
 
     // const data = {
-    //   name: "newssss19",
+    //   // name: "newssss19",
     //   email: "nessssss19@gmail.com",
     //   password: "1111",
-    //   bloodGroup: "O+",
-    //   contact: "03234234234",
-    //   address: "badda, dhaka",
-    //   dob: "12-22-23",
-    //   recency: "12-22-23",
-    //   nid: "32423492837408327",
+    //   // bloodGroup: "O+",
+    //   // contact: "03234234234",
+    //   // address: "badda, dhaka",
+    //   // dob: "12-22-23",
+    //   // recency: "12-22-23",
+    //   // nid: "32423492837408327",
     // };
 
     console.log("form data: ", data);
@@ -143,19 +143,31 @@ const Registration = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <ScrollView
+      style={styles.root}
+      contentContainerStyle={styles.scrollContainer}
+      showsVerticalScrollIndicator={false}
+    >
       <Form
         screenName={"Registration"}
         inputFields={inputFields}
         onSubmit={onSubmit}
       />
-      {duplicate && (
-        <Text style={{ color: "red", marginBottom: 150 }}>
-          User already exists!
-        </Text>
-      )}
-    </View>
+      {duplicate && <Text style={styles.error}>User already exists!</Text>}
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    // borderWidth: 1, borderColor: "red",
+  },
+  scrollContainer: {
+    // flex: 1,
+    alignItems: "center",
+    // justifyContent: "center",
+  },
+  error: { color: "red", paddingBottom: 100, paddingTop: 50 },
+});
 
 export default Registration;
