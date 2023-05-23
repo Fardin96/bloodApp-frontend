@@ -4,8 +4,13 @@ import Registration from "./screens/Registration";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./screens/Login";
+import { API_URL } from "@env";
 
 const Stack = createNativeStackNavigator();
+
+console.log("=========================================================");
+console.log(`CHECK EXPO IP AND SERVER IP: ${API_URL}`);
+console.log("=========================================================");
 
 export default function App() {
   return (

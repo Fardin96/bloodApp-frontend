@@ -5,7 +5,7 @@ import { Button, TextInput } from "@react-native-material/core";
 const { width } = Dimensions.get("screen");
 const FORM_WIDTH = width - 100;
 
-const Form = ({ inputFields, value, screenName, onSubmit, onChangeText }) => {
+const Form = ({ inputFields, screenName, onSubmit }) => {
   return (
     <ScrollView
       style={styles.root}
@@ -21,18 +21,17 @@ const Form = ({ inputFields, value, screenName, onSubmit, onChangeText }) => {
           <TextInput
             key={idx}
             label={i.label}
-            // autoComplete={false}
-            // autoCapitalize="false"
-            // clearButtonMode="unless-editing"
-
-            value={i.value}
-            style={{ width: FORM_WIDTH }}
+            autoCapitalize="none"
+            defaultValue={i.defaultValue}
+            // ? remove default value from value field
+            value={i.value === "" ? i.defaultValue : i.value}
+            keyboardType={i.keyboardType}
             onChangeText={i.setter}
-            // onSubmitEditing={onChangeText}
+            variant="outlined"
+            style={styles.textInput}
           />
         );
       })}
-
       <Button style={styles.button} title="Submit" onPress={onSubmit} />
     </ScrollView>
   );
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     alignItems: "center",
   },
+  textInput: { width: FORM_WIDTH, marginVertical: 5 },
   button: {
     marginVertical: 50,
     width: FORM_WIDTH,
