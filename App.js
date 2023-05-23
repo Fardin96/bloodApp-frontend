@@ -8,9 +8,9 @@ import { API_URL } from "@env";
 
 const Stack = createNativeStackNavigator();
 
-console.log("=========================================================");
-console.log(`CHECK EXPO IP AND SERVER IP: ${API_URL}`);
-console.log("=========================================================");
+console.warn("=========================================================");
+console.warn(`CHECK EXPO IP AND SERVER IP: ${API_URL}`);
+console.warn("=========================================================");
 
 export default function App() {
   return (
