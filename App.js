@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./screens/Login";
 import { API_URL } from "@env";
+import Home from "./screens/Home";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,16 +16,15 @@ console.warn("=========================================================");
 export default function App() {
   return (
     <NavigationContainer>
-      {/* <View style={styles.container}> */}
-      {/* <Registration /> */}
       <Stack.Navigator
         initialRouteName="login"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="registration" component={Registration} />
         <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="home" component={Home} />
       </Stack.Navigator>
-      {/* </View> */}
+      {/* <Registration /> */}
     </NavigationContainer>
   );
 }

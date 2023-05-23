@@ -1,8 +1,16 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import Form from "../components/Form";
 
-const Login = () => {
+import { API_URL } from "@env";
+
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,14 +27,14 @@ const Login = () => {
       setter: setEmail,
       value: email,
       keyboardType: "default",
-      defaultValue: "nessssss1@gmail.com",
+      defaultValue: "test@gmail.com",
     },
     {
       label: "password",
       setter: setPassword,
       value: password,
       keyboardType: "default",
-      defaultValue: "1111",
+      defaultValue: "test",
     },
     // {
     //   label: "blood group",
@@ -73,39 +81,39 @@ const Login = () => {
     // },
   ];
 
-  const [duplicate, setDuplicate] = useState(false);
-  const setDuplicateHandler = () => {
-    setDuplicate((prev) => !prev);
+  const [error, setError] = useState(false);
+  const setErrorHandler = () => {
+    setError((prev) => !prev);
   };
 
   const onSubmit = async () => {
     const data = {
-      name: name,
+      // name: name,
       email: email,
       password: password,
-      bloodGroup: bloodGroup,
-      contact: contact === "" ? "0" : contact,
-      address: address === "" ? "address" : address,
-      dob: dob === "" ? "12-12-2023" : dob,
-      recency: recency === "" ? "12-12-2023" : recency,
-      nid: nid === "" ? "0123456789" : nid,
+      // bloodGroup: bloodGroup,
+      // contact: contact === "" ? "0" : contact,
+      // address: address === "" ? "address" : address,
+      // dob: dob === "" ? "12-12-2023" : dob,
+      // recency: recency === "" ? "12-12-2023" : recency,
+      // nid: nid === "" ? "0123456789" : nid,
     };
 
     // const data = {
-    //   name: "newssss19",
+    // //   name: "newssss19",
     //   email: "nessssss19@gmail.com",
     //   password: "1111",
-    //   bloodGroup: "O+",
-    //   contact: "03234234234",
-    //   address: "badda, dhaka",
-    //   dob: "12-22-23",
-    //   recency: "12-22-23",
-    //   nid: "32423492837408327",
+    // //   bloodGroup: "O+",
+    // //   contact: "03234234234",
+    // //   address: "badda, dhaka",
+    // //   dob: "12-22-23",
+    // //   recency: "12-22-23",
+    // //   nid: "32423492837408327",
     // };
 
     console.log("form data: ", data);
 
-    const api = `${API_URL}/donor/add/`;
+    const api = `${API_URL}/auth/login/`;
     console.log("the api is :", api);
 
     const res = await fetch(api, {
@@ -118,16 +126,16 @@ const Login = () => {
     })
       .then(async (response) => {
         const res = await response.json();
-        console.log("response from registration: ", res);
+        console.log("response from login: ", res);
 
-        if (res === "User already exists!") {
-          setDuplicateHandler();
-        } else {
-          navigation.navigate("login");
+        if (!res.token) {
+          setErrorHandler();
+        } else if (res.token) {
+          navigation.navigate("home");
         }
       })
       .catch((error) => {
-        console.log("error from registration: ", error);
+        console.log("error from login: ", error);
       });
     // console.log("the complete res: ", res);
   };
@@ -143,7 +151,22 @@ const Login = () => {
         inputFields={inputFields}
         onSubmit={onSubmit}
       />
-      {duplicate && <Text style={styles.error}>Login Error!</Text>}
+
+      <View style={{ flexDirection: "row", paddingBottom: 15 }}>
+        <Text style={{ color: "black", marginRight: 5 }}>or,</Text>
+
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("registration");
+          }}
+        >
+          <Text style={{ color: "blue" }}>Register</Text>
+        </TouchableOpacity>
+      </View>
+
+      {error && (
+        <Text style={styles.error}>Please check your email and password!</Text>
+      )}
     </ScrollView>
   );
 };
@@ -161,7 +184,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
   },
-  error: { color: "red", paddingBottom: 100, paddingTop: 50 },
+  error: { color: "red", marginBottom: 50 },
 });
 
 export default Login;

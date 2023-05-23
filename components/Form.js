@@ -1,10 +1,11 @@
 import React from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button, TextInput } from "@react-native-material/core";
-
-const { width } = Dimensions.get("screen");
-const { height } = Dimensions.get("window");
-const FORM_WIDTH = width - 100;
+import {
+  FORM_WIDTH,
+  SCREEN_HEIGHT,
+  SCREEN_WEIDTH,
+} from "../constants/constants";
 
 const Form = ({ inputFields, screenName, onSubmit }) => {
   return (
@@ -36,8 +37,8 @@ const Form = ({ inputFields, screenName, onSubmit }) => {
 
 const styles = StyleSheet.create({
   root: {
-    height: height,
-    width: width,
+    height: SCREEN_HEIGHT,
+    width: SCREEN_WEIDTH,
     alignItems: "center",
     justifyContent: "space-around",
     // flex: 1,

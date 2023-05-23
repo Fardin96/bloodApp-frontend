@@ -133,7 +133,7 @@ const Registration = ({ navigation }) => {
         if (res === "User already exists!") {
           setDuplicateHandler();
         } else {
-          navigation.navigate("login");
+          navigation.navigate("home");
         }
       })
       .catch((error) => {
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
   },
-  error: { color: "red", paddingBottom: 100, paddingTop: 50 },
+  error: { color: "red", paddingBottom: 100 },
 });
 
 export default Registration;
