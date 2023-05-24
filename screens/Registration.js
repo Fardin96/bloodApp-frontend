@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 import Form from "../components/Form";
 
@@ -88,6 +94,10 @@ const Registration = ({ navigation }) => {
     // },
   ];
 
+  const loginHandler = () => {
+    navigation.navigate("login");
+  };
+
   const onSubmit = async () => {
     const data = {
       name: name,
@@ -153,6 +163,15 @@ const Registration = ({ navigation }) => {
         inputFields={inputFields}
         onSubmit={onSubmit}
       />
+
+      <View style={styles.textContainer}>
+        <Text style={styles.registered}>Already registered?</Text>
+
+        <TouchableOpacity onPress={loginHandler}>
+          <Text style={{ color: "blue" }}>Log in!</Text>
+        </TouchableOpacity>
+      </View>
+
       {duplicate && <Text style={styles.error}>User already exists!</Text>}
     </ScrollView>
   );
@@ -167,6 +186,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
   },
+  textContainer: { flexDirection: "row", paddingBottom: 15 },
+  registered: { color: "black", marginRight: 5 },
   error: { color: "red", paddingBottom: 100 },
 });
 

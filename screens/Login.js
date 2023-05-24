@@ -86,6 +86,10 @@ const Login = ({ navigation }) => {
     setError((prev) => !prev);
   };
 
+  const registerHandler = () => {
+    navigation.navigate("registration");
+  };
+
   const onSubmit = async () => {
     const data = {
       // name: name,
@@ -152,14 +156,10 @@ const Login = ({ navigation }) => {
         onSubmit={onSubmit}
       />
 
-      <View style={{ flexDirection: "row", paddingBottom: 15 }}>
-        <Text style={{ color: "black", marginRight: 5 }}>or,</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.or}>or,</Text>
 
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("registration");
-          }}
-        >
+        <TouchableOpacity onPress={registerHandler}>
           <Text style={{ color: "blue" }}>Register</Text>
         </TouchableOpacity>
       </View>
@@ -184,6 +184,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
   },
+  textContainer: { flexDirection: "row", paddingBottom: 15 },
+  or: { color: "black", marginRight: 5 },
   error: { color: "red", marginBottom: 50 },
 });
 

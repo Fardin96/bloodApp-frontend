@@ -5,23 +5,19 @@ import Card from "../components/Card";
 import { API_URL } from "@env";
 
 const Home = () => {
-  useEffect(async () => {
-    const api = `${API_URL}/donor/`;
-    console.log("the api is :", api);
+  useEffect(() => {
+    (async () => {
+      const api = `${API_URL}/donor/`;
+      console.log("the api is :", api);
 
-    const res = await fetch(api, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      // body: JSON.stringify(data),
-    })
-      .then((response) => {
-        const res = response.json();
-        console.log("response fetching donors: ", response.data);
-      })
-      .catch((error) => console.log("Error fetching donors: ", error));
+      // GET REQUEST
+      await fetch(api)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => console.log("Donor data: ", data))
+        .catch((error) => console.log("Error fetching donors: ", error));
+    })();
   }, []);
 
   return (
