@@ -87,7 +87,9 @@ const Login = ({ navigation }) => {
   };
 
   const registerHandler = () => {
-    navigation.navigate("registration");
+    () => {
+      navigation.navigate("registration");
+    };
   };
 
   const onSubmit = async () => {

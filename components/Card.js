@@ -2,10 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { CARD_WIDTH } from "../constants/constants";
 
-const Card = (props) => {
+const Card = ({ donorName }) => {
   return (
     <View style={styles.root}>
-      <Text style={styles.mainText}>{`Donor name`}</Text>
+      <Text style={styles.mainText}>{`${donorName}`}</Text>
 
       <View style={styles.bottomContainer}>
         {/* <WalletDetails
