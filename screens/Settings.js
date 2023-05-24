@@ -1,11 +1,12 @@
 import {
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   FORM_WIDTH,
   SCREEN_HEIGHT,
@@ -14,8 +15,14 @@ import {
 
 import Icon from "react-native-vector-icons/AntDesign";
 import { Button } from "@react-native-material/core";
+import Update from "../components/modal/Update";
 
 const Settings = ({ navigation }) => {
+  const [visible, setVisible] = useState(false);
+  const updateModalHandler = () => {
+    setVisible((prev) => !prev);
+  };
+
   const goBackHandler = () => {
     navigation.goBack();
   };
@@ -34,12 +41,7 @@ const Settings = ({ navigation }) => {
 
       <View style={styles.mainConatiner}>
         <View style={styles.optionContainer}>
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => {
-              console.log("first");
-            }}
-          >
+          <TouchableOpacity style={styles.option} onPress={updateModalHandler}>
             <Text>Update Info</Text>
           </TouchableOpacity>
 
@@ -60,6 +62,10 @@ const Settings = ({ navigation }) => {
           onPress={logoutHandler}
         />
       </View>
+
+      <Modal animationType="slide" visible={visible}>
+        <Update cancelModal={updateModalHandler} />
+      </Modal>
     </View>
   );
 };
