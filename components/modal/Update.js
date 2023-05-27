@@ -3,6 +3,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -13,6 +14,7 @@ import { API_URL } from "@env";
 import Form from "../Form";
 import Icon from "react-native-vector-icons/AntDesign";
 import { SCREEN_HEIGHT } from "../../constants/constants";
+// import { Toast } from "toastify-react-native";
 
 const Update = ({ navigation, cancelModal }) => {
   const [name, setName] = useState("");
@@ -98,10 +100,10 @@ const Update = ({ navigation, cancelModal }) => {
 
   const onSubmit = async () => {
     const data = {
-      name: name,
-      email: email,
-      password: password,
-      bloodGroup: bloodGroup,
+      name: name === "" ? "updatedName" : name,
+      email: email === "" ? "updatedemail@gmail.com" : email,
+      password: password === "" ? "1111" : password,
+      bloodGroup: bloodGroup === "" ? "0+" : bloodGroup,
       contact: contact === "" ? "0" : contact,
       address: address === "" ? "address" : address,
       dob: dob === "" ? "12-12-2023" : dob,
@@ -109,43 +111,59 @@ const Update = ({ navigation, cancelModal }) => {
       nid: nid === "" ? "0123456789" : nid,
     };
 
-    // const data = {
-    //   // name: "newssss19",
-    //   email: "nessssss19@gmail.com",
-    //   password: "1111",
-    //   // bloodGroup: "O+",
-    //   // contact: "03234234234",
-    //   // address: "badda, dhaka",
-    //   // dob: "12-22-23",
-    //   // recency: "12-22-23",
-    //   // nid: "32423492837408327",
-    // };
-
-    console.log("form data: ", data);
-
-    const api = `${API_URL}/donor/add/`;
-    console.log("the api is :", api);
-
-    const res = await fetch(api, {
+    // find user _id
+    const findRes = await fetch(`${API_URL}/donor/find/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ email: data.email }),
     })
-      .then(async (response) => {
-        const res = await response.json();
-        console.log("response from registration: ", res);
-
-        if (res === "User already exists!") {
-          setDuplicateHandler();
-        } else {
-          navigation.navigate("home");
-        }
+      .then((response) => {
+        const res = response.json();
+        // console.log("response finiding by email: ", response);
+        return res;
       })
+      .then((userData) => {
+        // console.log("data from finding by email: ", userData);
+        // return user;
+        return userData;
+      })
+      .catch((error) => console.log("error finding by email: ", error));
+    // console.log("the user is ", findRes._id);
+    const userID = findRes._id;
+
+    const api = `${API_URL}/update/${userID}`;
+    console.log("the api is :", api);
+    // console.log("the api is :", typeof api);
+    // console.log("what data am i updating: ", data);
+
+    // update user info request
+    const res = await fetch(
+      "http://192.168.68.108:5001/donor/update/646c5f06dbf2ac6c321f6f89",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then(async (response) => {
+        // console.log("is the error from converting the response?");
+        const res = await response.json();
+        console.log("yep, and this is the actual response ", res);
+        // console.log("response from update: ", res);
+        // return response.data;
+      })
+      // .then((data) => {
+      //   console.log("response from the update function ", data);
+      //   ToastAndroid.show("User successfully updated!", ToastAndroid.LONG);
+      // })
       .catch((error) => {
-        console.log("error from registration: ", error);
+        console.log("error from info update: ", error);
       });
     // console.log("the complete res: ", res);
   };
