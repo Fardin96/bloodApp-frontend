@@ -1,4 +1,5 @@
 import {
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,6 +12,7 @@ import React, { useState } from "react";
 import { API_URL } from "@env";
 import Form from "../Form";
 import Icon from "react-native-vector-icons/AntDesign";
+import { SCREEN_HEIGHT } from "../../constants/constants";
 
 const Update = ({ navigation, cancelModal }) => {
   const [name, setName] = useState("");
@@ -161,6 +163,7 @@ const Update = ({ navigation, cancelModal }) => {
           screenName={"Registration"}
           inputFields={inputFields}
           onSubmit={onSubmit}
+          rootStyle={styles.formStyle}
         />
       </ScrollView>
     </View>
@@ -169,10 +172,14 @@ const Update = ({ navigation, cancelModal }) => {
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
+  formStyle: {
+    //! tepmorary fix
+    height: SCREEN_HEIGHT + 200,
+  },
   topContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: Platform.OS === "ios" ? 50 : 20,
     // borderWidth: 1, borderColor: "red",
   },
   icContainer: {

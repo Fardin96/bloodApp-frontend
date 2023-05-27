@@ -7,11 +7,15 @@ import {
   SCREEN_WEIDTH,
 } from "../constants/constants";
 
-const Form = ({ inputFields, screenName, onSubmit }) => {
+const Form = ({ inputFields, screenName, onSubmit, rootStyle }) => {
   return (
-    <View style={styles.root} showsVerticalScrollIndicator={false}>
+    <View
+      style={{ ...styles.root, ...rootStyle }}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.secondary}>
         <Text style={styles.screenLabel}>{screenName}</Text>
+
         {inputFields.map((i, idx) => {
           return (
             <TextInput
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
   screenLabel: {
     fontSize: 30,
     paddingBottom: 50,
-    paddingTop: 50,
+    // paddingTop: 50,
   },
   textInput: {
     width: FORM_WIDTH,
