@@ -6,9 +6,11 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import Form from "../components/Form";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { API_URL } from "@env";
+
+import Form from "../components/Form";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -92,15 +94,8 @@ const Login = ({ navigation }) => {
 
   const onSubmit = async () => {
     const data = {
-      // name: name,
       email: email,
       password: password,
-      // bloodGroup: bloodGroup,
-      // contact: contact === "" ? "0" : contact,
-      // address: address === "" ? "address" : address,
-      // dob: dob === "" ? "12-12-2023" : dob,
-      // recency: recency === "" ? "12-12-2023" : recency,
-      // nid: nid === "" ? "0123456789" : nid,
     };
 
     // const data = {
@@ -135,7 +130,9 @@ const Login = ({ navigation }) => {
         if (!res.token) {
           setErrorHandler();
         } else if (res.token) {
-          navigation.navigate("home");
+          await AsyncStorage.setItem("@user_token", res.token).then((saved) => {
+            navigation.navigate("home");
+          });
         }
       })
       .catch((error) => {

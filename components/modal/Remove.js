@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,13 +9,40 @@ import {
 } from "react-native";
 import { Button } from "@react-native-material/core";
 import Icon from "react-native-vector-icons/AntDesign";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwtDecode from "jwt-decode";
 
+import { API_URL } from "@env";
 import { SCREEN_HEIGHT, SCREEN_WEIDTH } from "../../constants/constants";
 
 const HEIGHT = SCREEN_HEIGHT - 600;
 const WIDTH = SCREEN_WEIDTH - 100;
+let api = "";
 
-const Remove = ({ cancelModal }) => {
+const Remove = ({ cancelModal, navigation }) => {
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem("@user_token").then((token) => {
+        const decodedToken = jwtDecode(token);
+        console.log("decoded token: ", decodedToken.user);
+
+        api = `${API_URL}/donor/${decodedToken.user}`;
+        console.log("This is the api: ", api);
+      });
+      // console.log("Token for this user: ", token);
+    })();
+  }, []);
+
+  const removeHandler = async () => {
+    console.log("this user will be deleted: ", api);
+    await fetch(api, { method: "DELETE" })
+      .then(async () => {
+        console.log("User Deleted!");
+        navigation.navigate("login");
+      })
+      .catch((error) => console.log("Error deleting user: ", error));
+  };
+
   return (
     <TouchableOpacity onPress={cancelModal} style={styles.root}>
       <TouchableOpacity
@@ -33,7 +60,12 @@ const Remove = ({ cancelModal }) => {
           <Text> Are you sure you want {"\n"}to remove this account?</Text>
 
           <View style={styles.btnContainer}>
-            <Button variant="outlined" style={styles.button} title="Delete" />
+            <Button
+              variant="outlined"
+              style={styles.button}
+              title="Remove"
+              onPress={removeHandler}
+            />
             <Button
               style={styles.button}
               title="Cancel"

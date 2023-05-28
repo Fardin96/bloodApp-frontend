@@ -68,7 +68,7 @@ const Settings = ({ navigation }) => {
       </Modal>
 
       <Modal animationType="slide" visible={delVisible} transparent>
-        <Remove cancelModal={deleteModalHandler} />
+        <Remove cancelModal={deleteModalHandler} navigation={navigation} />
       </Modal>
     </View>
   );

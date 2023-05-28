@@ -82,10 +82,6 @@ const styles = StyleSheet.create({
     // borderColor: "red",
   },
   icContainer: {
-    // flexDirection: "row",
-    // flex: 1,
-    // paddingRight: 20,
-    // paddingBottom: 10,
     // borderWidth: 1,
     // borderColor: "green",
   },
