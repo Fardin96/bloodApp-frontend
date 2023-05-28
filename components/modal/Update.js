@@ -122,11 +122,11 @@ const Update = ({ navigation, cancelModal }) => {
     })
       .then((response) => {
         const res = response.json();
-        // console.log("response finiding by email: ", response);
+        console.log("response finiding by email: ", res);
         return res;
       })
       .then((userData) => {
-        // console.log("data from finding by email: ", userData);
+        console.log("data from finding by email: ", userData);
         // return user;
         return userData;
       })
