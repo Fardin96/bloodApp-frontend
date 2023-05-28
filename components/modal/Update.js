@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Platform,
   ScrollView,
@@ -7,14 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
-
-// import Form from "../components/Form";
-import { API_URL } from "@env";
-import Form from "../Form";
 import Icon from "react-native-vector-icons/AntDesign";
+
 import { SCREEN_HEIGHT } from "../../constants/constants";
-// import { Toast } from "toastify-react-native";
+import { API_URL } from "@env";
+
+import Form from "../Form";
 
 const Update = ({ navigation, cancelModal }) => {
   const [name, setName] = useState("");
@@ -127,7 +126,6 @@ const Update = ({ navigation, cancelModal }) => {
             const userID = res._id;
             const api = `${API_URL}/donor/update/${userID}`;
             // console.log('the api is :', api);
-            // // console.log('the api is :', typeof api);
 
             // update user info request
             const updateRes = await fetch(
@@ -161,14 +159,14 @@ const Update = ({ navigation, cancelModal }) => {
   return (
     <View style={styles.root}>
       <View style={styles.topContainer}>
-        <TouchableOpacity style={styles.icContainer} onPress={cancelModal}>
+        <TouchableOpacity onPress={cancelModal}>
           <Icon name="close" size={30} />
         </TouchableOpacity>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Form
-          screenName={"Registration"}
+          screenName={"Update Info"}
           inputFields={inputFields}
           onSubmit={onSubmit}
           rootStyle={styles.formStyle}
@@ -180,25 +178,18 @@ const Update = ({ navigation, cancelModal }) => {
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  formStyle: {
-    //! tepmorary fix
-    height: SCREEN_HEIGHT + 200,
-  },
   topContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: Platform.OS === "ios" ? 50 : 20,
-    // borderWidth: 1, borderColor: "red",
-  },
-  icContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    paddingRight: 20,
-    // paddingBottom: 10,
+    marginTop: Platform.OS === "ios" ? 50 : 20,
+    marginRight: 20,
     // borderWidth: 1,
-    // borderColor: "green",
+    // borderColor: "red",
+  },
+  formStyle: {
+    //! tepmorary fix
+    height: SCREEN_HEIGHT + 200,
   },
 });
 

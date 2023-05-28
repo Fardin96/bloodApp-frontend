@@ -16,11 +16,16 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import { Button } from "@react-native-material/core";
 import Update from "../components/modal/Update";
+import Remove from "../components/modal/Remove";
 
 const Settings = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
+  const [delVisible, setDelVisible] = useState(false);
   const updateModalHandler = () => {
     setVisible((prev) => !prev);
+  };
+  const deleteModalHandler = () => {
+    setDelVisible((prev) => !prev);
   };
 
   const goBackHandler = () => {
@@ -45,12 +50,7 @@ const Settings = ({ navigation }) => {
             <Text>Update Info</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => {
-              console.log("first");
-            }}
-          >
+          <TouchableOpacity style={styles.option} onPress={deleteModalHandler}>
             <Text>Remove Account</Text>
           </TouchableOpacity>
         </View>
@@ -65,6 +65,10 @@ const Settings = ({ navigation }) => {
 
       <Modal animationType="slide" visible={visible}>
         <Update cancelModal={updateModalHandler} />
+      </Modal>
+
+      <Modal animationType="slide" visible={delVisible} transparent>
+        <Remove cancelModal={deleteModalHandler} />
       </Modal>
     </View>
   );
