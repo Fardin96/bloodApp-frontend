@@ -77,7 +77,7 @@ const Settings = ({ navigation }) => {
 const styles = StyleSheet.create({
   root: { flex: 1 },
   topContainer: {
-    flex: 1,
+    // flex: 1,
     marginTop: 50,
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   optionContainer: {
     width: SCREEN_WEIDTH,
     // borderWidth: 1,
-    // borderColor: "red",
+    borderColor: "red",
   },
   button: {
     // alignSelf: "center",

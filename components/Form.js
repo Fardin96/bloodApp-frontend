@@ -7,7 +7,7 @@ import {
   SCREEN_WEIDTH,
 } from "../constants/constants";
 
-const Form = ({ inputFields, screenName, onSubmit, rootStyle }) => {
+const Form = ({ inputFields, screenName, onSubmit, rootStyle, editable }) => {
   return (
     <View
       style={{ ...styles.root, ...rootStyle }}
@@ -29,6 +29,7 @@ const Form = ({ inputFields, screenName, onSubmit, rootStyle }) => {
               onChangeText={i.setter}
               variant="outlined"
               style={styles.textInput}
+              editable={!i.editable ? i.editable : true}
             />
           );
         })}

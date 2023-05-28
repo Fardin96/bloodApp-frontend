@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Platform,
   ScrollView,
@@ -14,6 +14,8 @@ import { SCREEN_HEIGHT } from "../../constants/constants";
 import { API_URL } from "@env";
 
 import Form from "../Form";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwtDecode from "jwt-decode";
 
 const Update = ({ navigation, cancelModal }) => {
   const [name, setName] = useState("");
@@ -40,6 +42,7 @@ const Update = ({ navigation, cancelModal }) => {
       value: email,
       keyboardType: "default",
       defaultValue: "nessssss1@gmail.com",
+      editable: false,
     },
     {
       label: "password",
@@ -92,6 +95,35 @@ const Update = ({ navigation, cancelModal }) => {
       defaultValue: "32423492837408327",
     },
   ];
+
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem("@user_token").then(
+        async (token) => {
+          const decodedToken = jwtDecode(token);
+          console.log("decoded token: ", decodedToken.user);
+
+          api = `${API_URL}/donor/${decodedToken.user}`;
+          // console.log("This is the api: ", api);
+
+          await fetch(api)
+            .then(async (response) => {
+              await response
+                .json()
+                .then((res) => {
+                  // console.log("The user is: ", res);
+                  setEmail(res.email);
+                })
+                .catch((err) =>
+                  console.log("Error converting user response to json: ", err)
+                );
+            })
+            .catch((error) => console.log("Error fetching user: ", error));
+        }
+      );
+      // console.log("Token for this user: ", token);
+    })();
+  }, []);
 
   const loginHandler = () => {
     navigation.navigate("login");

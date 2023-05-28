@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
       setter: setEmail,
       value: email,
       keyboardType: "default",
-      defaultValue: "test@gmail.com",
+      defaultValue: "Tanzim@gmail.co",
     },
     {
       label: "password",
