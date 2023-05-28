@@ -15,7 +15,7 @@ import jwtDecode from "jwt-decode";
 import { API_URL } from "@env";
 import { SCREEN_HEIGHT, SCREEN_WEIDTH } from "../../constants/constants";
 
-const HEIGHT = SCREEN_HEIGHT - 600;
+const HEIGHT = 300;
 const WIDTH = SCREEN_WEIDTH - 100;
 let api = "";
 
@@ -44,7 +44,11 @@ const Remove = ({ cancelModal, navigation }) => {
   };
 
   return (
-    <TouchableOpacity onPress={cancelModal} style={styles.root}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={cancelModal}
+      style={styles.root}
+    >
       <TouchableOpacity
         onPress={() => {}}
         activeOpacity={1}
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     width: WIDTH - 80,
-    marginTop: 30,
+    marginTop: 80,
     //   borderWidth: 2,
     //   borderColor: "blue",
   },

@@ -3,6 +3,7 @@ module.exports = function (api) {
   return {
     presets: ["babel-preset-expo"],
     plugins: [
+      // dotenv
       [
         "module:react-native-dotenv",
         {
@@ -18,6 +19,8 @@ module.exports = function (api) {
           verbose: false,
         },
       ],
+      // remove console
+      ["transform-remove-console"],
     ],
   };
 };
