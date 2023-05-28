@@ -76,14 +76,18 @@ const Settings = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  topContainer: { flexDirection: "row", alignItems: "center", marginTop: 50 },
-  icContainer: {
+  topContainer: {
     flex: 1,
+    marginTop: 50,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
     paddingLeft: 20,
     paddingBottom: 10,
+    // borderWidth: 1,
+    // borderColor: "red",
+  },
+  icContainer: {
     // borderWidth: 1,
     // borderColor: "green",
   },

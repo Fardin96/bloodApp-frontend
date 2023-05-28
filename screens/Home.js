@@ -71,13 +71,21 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  topContainer: { flexDirection: "row", alignItems: "center", marginTop: 50 },
-  icContainer: {
-    flex: 1,
+  topContainer: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "flex-end",
-    paddingRight: 20,
-    paddingBottom: 10,
+    marginTop: 50,
+    marginRight: 20,
+    marginBottom: 10,
+    // borderWidth: 1,
+    // borderColor: "red",
+  },
+  icContainer: {
+    // flexDirection: "row",
+    // flex: 1,
+    // paddingRight: 20,
+    // paddingBottom: 10,
     // borderWidth: 1,
     // borderColor: "green",
   },
