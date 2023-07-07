@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Platform,
   ScrollView,
@@ -7,101 +7,101 @@ import {
   ToastAndroid,
   TouchableOpacity,
   View,
-} from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-import { SCREEN_HEIGHT } from "../../constants/constants";
-import { API_URL } from "@env";
+import { SCREEN_HEIGHT } from '../../constants/constants';
+import { API_URL } from '@env';
 
-import Form from "../Form";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import jwtDecode from "jwt-decode";
+import Form from '../Form';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 
 const Update = ({ navigation, cancelModal }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [bloodGroup, setBloodGroup] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
-  const [dob, setDob] = useState("");
-  const [recency, setRecency] = useState("");
-  const [nid, setNid] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [bloodGroup, setBloodGroup] = useState('');
+  const [contact, setContact] = useState('');
+  const [address, setAddress] = useState('');
+  const [dob, setDob] = useState('');
+  const [recency, setRecency] = useState('');
+  const [nid, setNid] = useState('');
 
   const inputFields = [
     {
-      label: "name",
+      label: 'name',
       setter: setName,
       value: name,
-      keyboardType: "default",
-      defaultValue: "newssss1",
+      keyboardType: 'default',
+      defaultValue: 'newssss1',
     },
     {
-      label: "email",
+      label: 'email',
       setter: setEmail,
       value: email,
-      keyboardType: "default",
-      defaultValue: "nessssss1@gmail.com",
+      keyboardType: 'default',
+      defaultValue: 'nessssss1@gmail.com',
       editable: false,
     },
     {
-      label: "password",
+      label: 'password',
       setter: setPassword,
       value: password,
-      keyboardType: "default",
-      defaultValue: "1111",
+      keyboardType: 'default',
+      defaultValue: '1111',
     },
     {
-      label: "blood group",
+      label: 'blood group',
       setter: setBloodGroup,
       value: bloodGroup,
-      keyboardType: "default",
-      defaultValue: "O+",
+      keyboardType: 'default',
+      defaultValue: 'O+',
     },
     {
-      label: "contact",
+      label: 'contact',
       setter: setContact,
       value: contact,
-      keyboardType: "numeric",
-      defaultValue: "03234234234",
+      keyboardType: 'numeric',
+      defaultValue: '03234234234',
     },
     {
-      label: "address",
+      label: 'address',
       setter: setAddress,
       value: address,
-      keyboardType: "default",
-      defaultValue: "badda, dhaka",
+      keyboardType: 'default',
+      defaultValue: 'badda, dhaka',
     },
 
     {
-      label: "dob",
+      label: 'dob',
       setter: setDob,
       value: dob,
-      keyboardType: "default",
-      defaultValue: "12-22-23",
+      keyboardType: 'default',
+      defaultValue: '12-22-23',
     },
     {
-      label: "recency",
+      label: 'recency',
       setter: setRecency,
       value: recency,
-      keyboardType: "default",
-      defaultValue: "12-22-23",
+      keyboardType: 'default',
+      defaultValue: '12-22-23',
     },
     {
-      label: "nid",
+      label: 'nid',
       setter: setNid,
       value: nid,
-      keyboardType: "numeric",
-      defaultValue: "32423492837408327",
+      keyboardType: 'numeric',
+      defaultValue: '32423492837408327',
     },
   ];
 
   useEffect(() => {
     (async () => {
-      const token = await AsyncStorage.getItem("@user_token").then(
+      const token = await AsyncStorage.getItem('@user_token').then(
         async (token) => {
           const decodedToken = jwtDecode(token);
-          console.log("decoded token: ", decodedToken.user);
+          console.log('decoded token: ', decodedToken.user);
 
           api = `${API_URL}/donor/${decodedToken.user}`;
           // console.log("This is the api: ", api);
@@ -115,39 +115,39 @@ const Update = ({ navigation, cancelModal }) => {
                   setEmail(res.email);
                 })
                 .catch((err) =>
-                  console.log("Error converting user response to json: ", err)
+                  console.log('Error converting user response to json: ', err)
                 );
             })
-            .catch((error) => console.log("Error fetching user: ", error));
+            .catch((error) => console.log('Error fetching user: ', error));
         }
       );
-      // console.log("Token for this user: ", token);
+      console.log('Token for this user: ', token);
     })();
   }, []);
 
   const loginHandler = () => {
-    navigation.navigate("login");
+    navigation.navigate('login');
   };
 
   const onSubmit = async () => {
     const data = {
-      name: name === "" ? "updatedName" : name,
-      email: email === "" ? "updatedemail@gmail.com" : email,
-      password: password === "" ? "1111" : password,
-      bloodGroup: bloodGroup === "" ? "0+" : bloodGroup,
-      contact: contact === "" ? "0" : contact,
-      address: address === "" ? "address" : address,
-      dob: dob === "" ? "12-12-2023" : dob,
-      recency: recency === "" ? "12-12-2023" : recency,
-      nid: nid === "" ? "0123456789" : nid,
+      name: name === '' ? 'updatedName' : name,
+      email: email === '' ? 'updatedemail@gmail.com' : email,
+      password: password === '' ? '1111' : password,
+      bloodGroup: bloodGroup === '' ? '0+' : bloodGroup,
+      contact: contact === '' ? '0' : contact,
+      address: address === '' ? 'address' : address,
+      dob: dob === '' ? '12-12-2023' : dob,
+      recency: recency === '' ? '12-12-2023' : recency,
+      nid: nid === '' ? '0123456789' : nid,
     };
 
     // find user _id
     const findRes = await fetch(`${API_URL}/donor/find/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
+        Accept: 'application/json',
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({ email: data.email }),
     })
@@ -164,41 +164,41 @@ const Update = ({ navigation, cancelModal }) => {
               // 'http://192.168.0.195:5001/donor/update/6460c616b041a39b2280cbe3',
               api,
               {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                  Accept: "application/json",
-                  "Content-type": "application/json",
+                  Accept: 'application/json',
+                  'Content-type': 'application/json',
                 },
                 body: JSON.stringify(data),
               }
             )
               .then(async (response) => {
                 if (!response.ok) {
-                  console.log("Could not update user from front end!");
+                  console.log('Could not update user from front end!');
                 } else {
-                  console.log("User info updated!");
+                  console.log('User info updated!');
                 }
               })
               .catch((error) => {
-                console.log("error from info update: ", error);
+                console.log('error from info update: ', error);
               });
           })
-          .catch((err) => console.log("error:"));
+          .catch((err) => console.log('error:'));
       })
-      .catch((error) => console.log("error finding by email: ", error));
+      .catch((error) => console.log('error finding by email: ', error));
   };
 
   return (
     <View style={styles.root}>
       <View style={styles.topContainer}>
         <TouchableOpacity onPress={cancelModal}>
-          <Icon name="close" size={30} />
+          <Icon name='close' size={30} />
         </TouchableOpacity>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Form
-          screenName={"Update Info"}
+          screenName={'Update Info'}
           inputFields={inputFields}
           onSubmit={onSubmit}
           rootStyle={styles.formStyle}
@@ -211,10 +211,10 @@ const Update = ({ navigation, cancelModal }) => {
 const styles = StyleSheet.create({
   root: { flex: 1 },
   topContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginTop: Platform.OS === "ios" ? 50 : 20,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: Platform.OS === 'ios' ? 50 : 20,
     marginRight: 20,
     // borderWidth: 1,
     // borderColor: "red",

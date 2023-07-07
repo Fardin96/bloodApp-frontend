@@ -4,17 +4,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import React, { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native';
+import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { API_URL } from "@env";
+import { API_URL } from '@env';
 
-import Form from "../components/Form";
+import Form from '../components/Form';
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const inputFields = [
     // {
@@ -25,18 +25,18 @@ const Login = ({ navigation }) => {
     //   defaultValue: "newssss1",
     // },
     {
-      label: "email",
+      label: 'email',
       setter: setEmail,
       value: email,
-      keyboardType: "default",
-      defaultValue: "Tanzim@gmail.co",
+      keyboardType: 'default',
+      // defaultValue: "Tanzim@gmail.co",
     },
     {
-      label: "password",
+      label: 'password',
       setter: setPassword,
       value: password,
-      keyboardType: "default",
-      defaultValue: "test",
+      keyboardType: 'default',
+      // defaultValue: "test",
     },
     // {
     //   label: "blood group",
@@ -89,7 +89,7 @@ const Login = ({ navigation }) => {
   };
 
   const registerHandler = () => {
-    navigation.navigate("registration");
+    navigation.navigate('registration');
   };
 
   const onSubmit = async () => {
@@ -110,33 +110,33 @@ const Login = ({ navigation }) => {
     // //   nid: "32423492837408327",
     // };
 
-    console.log("form data: ", data);
+    console.log('form data: ', data);
 
     const api = `${API_URL}/auth/login/`;
-    console.log("the api is :", api);
+    console.log('the api is :', api);
 
     const res = await fetch(api, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
+        Accept: 'application/json',
+        'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
     })
       .then(async (response) => {
         const res = await response.json();
-        console.log("response from login: ", res);
+        console.log('response from login: ', res);
 
         if (!res.token) {
           setErrorHandler();
         } else if (res.token) {
-          await AsyncStorage.setItem("@user_token", res.token).then((saved) => {
-            navigation.navigate("home");
+          await AsyncStorage.setItem('@user_token', res.token).then((saved) => {
+            navigation.navigate('home');
           });
         }
       })
       .catch((error) => {
-        console.log("error from login: ", error);
+        console.log('error from login: ', error);
       });
     // console.log("the complete res: ", res);
   };
@@ -148,7 +148,7 @@ const Login = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
     >
       <Form
-        screenName={"Login"}
+        screenName={'Login'}
         inputFields={inputFields}
         onSubmit={onSubmit}
       />
@@ -157,7 +157,7 @@ const Login = ({ navigation }) => {
         <Text style={styles.or}>or,</Text>
 
         <TouchableOpacity onPress={registerHandler}>
-          <Text style={{ color: "blue" }}>Register</Text>
+          <Text style={{ color: 'blue' }}>Register</Text>
         </TouchableOpacity>
       </View>
 
@@ -178,12 +178,12 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     // flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     // justifyContent: "center",
   },
-  textContainer: { flexDirection: "row", paddingBottom: 15 },
-  or: { color: "black", marginRight: 5 },
-  error: { color: "red", marginBottom: 50 },
+  textContainer: { flexDirection: 'row', paddingBottom: 15 },
+  or: { color: 'black', marginRight: 5 },
+  error: { color: 'red', marginBottom: 50 },
 });
 
 export default Login;
